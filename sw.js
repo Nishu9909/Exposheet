@@ -1,8 +1,8 @@
-const CACHE_NAME = 'nova-expense-v1';
+const CACHE_NAME = 'nova-expense-v2';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  './',
+  './index.html',
+  './manifest.json',
   'https://cdn.tailwindcss.com'
 ];
 
@@ -13,8 +13,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // For API calls (Firebase), we rely on Firebase's internal offline persistence
-  // For static assets, we use Cache First, falling back to Network
+  // Use Cache First, falling back to Network for static assets
   if (event.request.mode === 'navigate' || event.request.destination === 'style' || event.request.destination === 'script') {
      event.respondWith(
       caches.match(event.request).then((response) => {
